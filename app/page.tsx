@@ -1,7 +1,10 @@
-
 "use client";
 import Image from "next/image";
 import { Sparkles, ShieldCheck, Users, ChevronRight, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+
+// ON/OFF rápido
+const SHOW_PROJECTS = false;
+const SHOW_PROPERTIES = false;
 
 function Stat({label, value}:{label:string; value:string}){
   return (
@@ -86,8 +89,8 @@ export default function Page(){
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#servicios" className="hover:opacity-70">Servicios</a>
-            <a href="#proyectos" className="hover:opacity-70">Proyectos</a>
-            <a href="#propiedades" className="hover:opacity-70">Propiedades</a>
+            {SHOW_PROJECTS && <a href="#proyectos" className="hover:opacity-70">Proyectos</a>}
+            {SHOW_PROPERTIES && <a href="#propiedades" className="hover:opacity-70">Propiedades</a>}
             <a href="#inversionistas" className="hover:opacity-70">Inversionistas</a>
             <a href="#contacto" className="hover:opacity-70">Contacto</a>
           </nav>
@@ -111,7 +114,7 @@ export default function Page(){
               Hogares renovados para que sigan siendo de nuestra gente. Educación, transparencia y propósito real en cada proyecto.
             </p>
             <div className="flex flex-wrap gap-3 mt-6">
-              <a className="btn btn-primary" href="#propiedades">Ver propiedades</a>
+              <a className="btn btn-primary" href="#servicios">Conocer servicios</a>
               <a className="btn btn-secondary" href="#inversionistas">Unirme como inversionista</a>
             </div>
             <div className="grid grid-cols-3 gap-6 mt-10">
@@ -147,34 +150,38 @@ export default function Page(){
         </div>
       </section>
 
-      {/* PROJECTS */}
-      <section id="proyectos" className="py-16 md:py-20 border-t">
-        <div className="container">
-          <SectionTitle kicker="Antes / Después" title="Proyectos con propósito"
-            subtitle="Cada intervención busca devolverle vida a una estructura y un hogar a una familia boricua." />
-          <div className="grid md:grid-cols-3 gap-5">
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
+      {/* PROJECTS (oculto por ahora) */}
+      {SHOW_PROJECTS && (
+        <section id="proyectos" className="py-16 md:py-20 border-t">
+          <div className="container">
+            <SectionTitle kicker="Antes / Después" title="Proyectos con propósito"
+              subtitle="Cada intervención busca devolverle vida a una estructura y un hogar a una familia boricua." />
+            <div className="grid md:grid-cols-3 gap-5">
+              <PropertyCard />
+              <PropertyCard />
+              <PropertyCard />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* PROPERTIES */}
-      <section id="propiedades" className="py-16 md:py-20 border-t bg-gray-50">
-        <div className="container">
-          <SectionTitle kicker="Inventario" title="Propiedades destacadas"
-            subtitle="Filtra por municipio, precio y estado de rehabilitación cuando conectemos a tu MLS/Sheet." />
-          <div className="grid md:grid-cols-3 gap-5">
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
+      {/* PROPERTIES (oculto por ahora) */}
+      {SHOW_PROPERTIES && (
+        <section id="propiedades" className="py-16 md:py-20 border-t bg-gray-50">
+          <div className="container">
+            <SectionTitle kicker="Inventario" title="Propiedades destacadas"
+              subtitle="Filtra por municipio, precio y estado de rehabilitación cuando conectemos a tu MLS/Sheet." />
+            <div className="grid md:grid-cols-3 gap-5">
+              <PropertyCard />
+              <PropertyCard />
+              <PropertyCard />
+            </div>
+            <div className="text-center mt-8">
+              <a className="btn btn-secondary" href="#contacto">Ver todo el inventario</a>
+            </div>
           </div>
-          <div className="text-center mt-8">
-            <a className="btn btn-secondary" href="#contacto">Ver todo el inventario</a>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* INVESTORS */}
       <section id="inversionistas" className="py-16 md:py-20 border-t">
@@ -215,13 +222,13 @@ export default function Page(){
             </div>
             <div className="space-y-4">
               <div className="card p-6 space-y-3 text-sm">
-                <div className="flex items-center gap-2"><Phone className="w-4 h-4" /> <span>(787) 543‑1176</span></div>
+                <div className="flex items-center gap-2"><Phone className="w-4 h-4" /> <span>(787) 543-1176</span></div>
                 <div className="flex items-center gap-2"><Mail className="w-4 h-4" /> <span>valentinr@realityrealtypr.com</span></div>
                 <div className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5" /> <span>Guayama, Puerto Rico</span></div>
               </div>
               <div className="card p-6">
                 <div className="text-xs text-gray-500">Licencia de Corredor:</div>
-                <div className="font-semibold">C‑25626</div>
+                <div className="font-semibold">C-25626</div>
               </div>
             </div>
           </div>
