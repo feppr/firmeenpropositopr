@@ -5,6 +5,7 @@ import { Sparkles, ShieldCheck, Users, ChevronRight, Phone, Mail, MapPin, Messag
 // ON/OFF rápido
 const SHOW_PROJECTS = false;
 const SHOW_PROPERTIES = false;
+const SHOW_INVESTORS = false;
 
 function Stat({label, value}:{label:string; value:string}){
   return (
@@ -73,6 +74,19 @@ export default function Page(){
     openMail('[FEP] Nuevo interés de inversión', `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nMunicipio: ${muni}\n\nObjetivo:\n${goal}`);
   };
 
+  const onSellerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const nombre = String(fd.get('nombre')||'');
+    const telefono = String(fd.get('telefono')||'');
+    const email = String(fd.get('email')||'');
+    const direccion = String(fd.get('direccion')||'');
+    const municipio = String(fd.get('municipio')||'');
+    const condicion = String(fd.get('condicion')||'');
+    const detalles = String(fd.get('detalles')||'');
+    openMail('[FEP] Quiero vender mi casa', `Nombre: ${nombre}\nTeléfono: ${telefono}\nEmail: ${email}\nDirección: ${direccion}\nMunicipio: ${municipio}\nCondición: ${condicion}\n\nDetalles:\n${detalles}`);
+  };
+
   return (
     <div className="min-h-screen">
       {/* NAV */}
@@ -89,9 +103,10 @@ export default function Page(){
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#servicios" className="hover:opacity-70">Servicios</a>
+            <a href="#vende-tu-casa" className="hover:opacity-70">Vender mi casa</a>
             {SHOW_PROJECTS && <a href="#proyectos" className="hover:opacity-70">Proyectos</a>}
             {SHOW_PROPERTIES && <a href="#propiedades" className="hover:opacity-70">Propiedades</a>}
-            <a href="#inversionistas" className="hover:opacity-70">Inversionistas</a>
+            {SHOW_INVESTORS && <a href="#inversionistas" className="hover:opacity-70">Inversionistas</a>}
             <a href="#contacto" className="hover:opacity-70">Contacto</a>
           </nav>
           <div className="flex items-center gap-2">
@@ -115,7 +130,7 @@ export default function Page(){
             </p>
             <div className="flex flex-wrap gap-3 mt-6">
               <a className="btn btn-primary" href="#servicios">Conocer servicios</a>
-              <a className="btn btn-secondary" href="#inversionistas">Unirme como inversionista</a>
+              <a className="btn btn-secondary" href="#vende-tu-casa">Vender mi casa</a>
             </div>
             <div className="grid grid-cols-3 gap-6 mt-10">
               <Stat label="Propiedades rehabilitadas" value="—" />
@@ -144,8 +159,52 @@ export default function Page(){
             subtitle="FEP Real Estate Projects (inversión/rehabilitación) y FEP Realty Services (corretaje y administración)." />
           <div className="grid md:grid-cols-3 gap-5">
             <div className="card p-6"><h3 className="font-semibold mb-2">FEP Real Estate Projects</h3><p className="text-sm text-gray-600">Adquisición, diseño y rehabilitación de propiedades abandonadas. Legal, permisos y obra con equipos locales.</p></div>
-            <div className="card p-6"><h3 className="font-semibold mb-2">FEP Realty Services</h3><p className="text-sm text-gray-600">Corretaje residencial y de inversión, property management y representación ética del comprador/vendedor.</p></div>
+            <div className="card p-6"><h3 className="font-semibold mb-2">FEP Realty Services via Reality Realty</h3><p className="text-sm text-gray-600">Corretaje residencial y de inversión, property management y representación ética del comprador/vendedor.</p></div>
             <div className="card p-6"><h3 className="font-semibold mb-2">Educación & Contenido</h3><p className="text-sm text-gray-600">Contenido práctico sobre inversión responsable, financiamiento y procesos en Puerto Rico.</p></div>
+          </div>
+        </div>
+      </section>
+
+      {/* VENDE TU CASA */}
+      <section id="vende-tu-casa" className="py-16 md:py-20 border-t">
+        <div className="container max-w-5xl">
+          <SectionTitle
+            kicker="Compra directa"
+            title="¿Casa abandonada o con problemas? La compramos."
+            subtitle="Vende de forma rápida y segura. Compra directa junto a inversionistas locales — en el estado actual (‘as-is’), sin comisiones ocultas."
+          />
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="card p-6 space-y-3 text-sm">
+              <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                <li>Cierre rápido y oferta justa.</li>
+                <li>Nos encargamos de permisos, deudas y proceso legal.</li>
+                <li>Opciones de efectivo o financiamiento.</li>
+                <li>Evaluación gratis y sin obligación.</li>
+              </ul>
+              <div className="mt-4 text-xs text-gray-500 flex items-center gap-2"><ShieldCheck className="w-4 h-4" /> Lic. C-25626 · Equipo local en Puerto Rico</div>
+            </div>
+            <div className="card p-6">
+              <form className="grid gap-3" onSubmit={onSellerSubmit}>
+                <input className="border rounded-xl px-3 py-2" name="nombre" placeholder="Nombre y Apellido" required />
+                <input className="border rounded-xl px-3 py-2" name="telefono" placeholder="Teléfono / WhatsApp" required />
+                <input className="border rounded-xl px-3 py-2" name="email" placeholder="Email (opcional)" type="email" />
+                <input className="border rounded-xl px-3 py-2" name="direccion" placeholder="Dirección de la propiedad" />
+                <div className="grid grid-cols-2 gap-3">
+                  <input className="border rounded-xl px-3 py-2" name="municipio" placeholder="Municipio" />
+                  <select className="border rounded-xl px-3 py-2" name="condicion" defaultValue="">
+                    <option value="" disabled>Condición</option>
+                    <option value="habitable">Habitable</option>
+                    <option value="reparaciones">Necesita reparaciones</option>
+                    <option value="abandonada">Abandonada</option>
+                  </select>
+                </div>
+                <textarea className="border rounded-xl px-3 py-2" name="detalles" rows={4} placeholder="Cuéntanos brevemente la situación" />
+                <div className="flex items-center justify-between">
+                  <button type="submit" className="btn btn-primary">Solicitar evaluación</button>
+                  <a className="btn btn-secondary" href="https://wa.me/17875431176?text=Hola%20FEP%2C%20quiero%20vender%20mi%20casa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -183,26 +242,28 @@ export default function Page(){
         </section>
       )}
 
-      {/* INVESTORS */}
-      <section id="inversionistas" className="py-16 md:py-20 border-t">
-        <div className="container max-w-4xl">
-          <SectionTitle kicker="Comunidad FEP" title="¿Quieres invertir con nosotros?"
-            subtitle="Trabajamos con inversionistas locales bajo estructuras claras (joint venture, deuda privada, equity). Transparencia primero." />
-          <div className="card p-6">
-            <form className="grid md:grid-cols-2 gap-4" onSubmit={onInvestorSubmit}>
-              <input className="border rounded-xl px-3 py-2" name="nombre" placeholder="Nombre y Apellido" />
-              <input className="border rounded-xl px-3 py-2" name="email" placeholder="Email" type="email" />
-              <input className="border rounded-xl px-3 py-2" name="telefono" placeholder="Teléfono / WhatsApp" />
-              <input className="border rounded-xl px-3 py-2" name="municipio" placeholder="Municipio" />
-              <textarea className="border rounded-xl px-3 py-2 md:col-span-2" name="objetivo" placeholder="Cuéntanos tu objetivo (flujo de caja, flips, buy & hold) y rango de inversión." rows={5} />
-              <div className="md:col-span-2 flex items-center justify-between">
-                <div className="text-xs text-gray-500 flex items-center gap-2"><Users className="w-4 h-4" /> Nunca compartiremos tus datos.</div>
-                <button type="submit" className="btn btn-primary">Enviar interés</button>
-              </div>
-            </form>
+      {/* INVESTORS (oculto por ahora) */}
+      {SHOW_INVESTORS && (
+        <section id="inversionistas" className="py-16 md:py-20 border-t">
+          <div className="container max-w-4xl">
+            <SectionTitle kicker="Comunidad FEP" title="¿Quieres invertir con nosotros?"
+              subtitle="Trabajamos con inversionistas locales bajo estructuras claras (joint venture, deuda privada, equity). Transparencia primero." />
+            <div className="card p-6">
+              <form className="grid md:grid-cols-2 gap-4" onSubmit={onInvestorSubmit}>
+                <input className="border rounded-xl px-3 py-2" name="nombre" placeholder="Nombre y Apellido" />
+                <input className="border rounded-xl px-3 py-2" name="email" placeholder="Email" type="email" />
+                <input className="border rounded-xl px-3 py-2" name="telefono" placeholder="Teléfono / WhatsApp" />
+                <input className="border rounded-xl px-3 py-2" name="municipio" placeholder="Municipio" />
+                <textarea className="border rounded-xl px-3 py-2 md:col-span-2" name="objetivo" placeholder="Cuéntanos tu objetivo (flujo de caja, flips, buy & hold) y rango de inversión." rows={5} />
+                <div className="md:col-span-2 flex items-center justify-between">
+                  <div className="text-xs text-gray-500 flex items-center gap-2"><Users className="w-4 h-4" /> Nunca compartiremos tus datos.</div>
+                  <button type="submit" className="btn btn-primary">Enviar interés</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CONTACT */}
       <section id="contacto" className="py-16 md:py-20 border-t bg-gray-50">
@@ -258,3 +319,4 @@ export default function Page(){
     </div>
   );
 }
+
