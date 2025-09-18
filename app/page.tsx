@@ -306,7 +306,7 @@ export default function Page(){
       <footer className="border-t">
         <div className="container py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} FEP Real Estate — Firme en Propósito · <a href="https://firmeenpropositopr.com" className="underline hover:opacity-70">firmeenpropositopr.com</a>
+            © {new Date().getFullYear()} FEP Real Estate — Firme en Propósito · 
           </div>
           <div className="flex items-center gap-3 text-sm">
             <a className="hover:opacity-70" href="#">Instagram</a>
