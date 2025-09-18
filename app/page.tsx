@@ -141,7 +141,7 @@ export default function Page(){
           <div className="relative">
             <div className="card overflow-hidden">
               <div className="aspect-[4/5] w-full relative">
-                <Image src="/hero.jpg" alt="Proyecto FEP" fill className="object-cover" />
+                <Image src="/IMG_2757.JPG" alt="Proyecto FEP" fill className="object-cover" />
               </div>
             </div>
             <div className="absolute -bottom-4 -right-4 bg-white border rounded-2xl shadow p-3 hidden md:flex items-center gap-2">
