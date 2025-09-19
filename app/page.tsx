@@ -311,7 +311,8 @@ export default function Page(){
           <div className="flex items-center gap-3 text-sm">
             <a href="https://instagram.com/fep.puertorico" target="_blank" rel="noopener noreferrer" className="hover:opacity-70">
   Instagram</a>
-            <a className="hover:opacity-70" href="#">Facebook</a>
+            <a href="https://facebook.com/profile.php?id=61581173517072" target="_blank" rel="noopener noreferrer" className="hover:opacity-70">
+  Facebook</a>
             <a className="hover:opacity-70" href="#">YouTube</a>
             <a className="hover:opacity-70" href="#">Podcast</a>
           </div>
